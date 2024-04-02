@@ -20,9 +20,8 @@
 * Junit
 * Gradle
 
-### Swagger documentation can be found at
-http://localhost:8080/swagger-ui.html
-![swagger](/swagger.jpg "Swagger")
+### Swagger documentation can be found at http://localhost:8080/swagger-ui.html
+![swagger](/swagger-ui.jpg "Swagger")
 
 ### Local MySql instance is started automatically when running the application locally and the configuration is loaded from compose.yaml
 - In case you don't want to run docker compose automatically set
