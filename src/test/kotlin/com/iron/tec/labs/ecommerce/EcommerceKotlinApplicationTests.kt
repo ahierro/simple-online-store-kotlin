@@ -1,4 +1,4 @@
-package com.iron.tec.labs.ecommercekotlin
+package com.iron.tec.labs.ecommerce
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

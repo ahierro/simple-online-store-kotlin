@@ -1,4 +1,4 @@
-package com.iron.tec.labs.ecommercekotlin
+package com.iron.tec.labs.ecommerce
 
 import org.springframework.boot.fromApplication
 import org.springframework.boot.test.context.TestConfiguration
