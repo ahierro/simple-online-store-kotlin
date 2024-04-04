@@ -1,7 +1,10 @@
 package com.iron.tec.labs.ecommerce.controllers
 
+import com.fasterxml.jackson.databind.exc.MismatchedInputException
 import com.iron.tec.labs.ecommerce.dto.ValidationError
 import org.slf4j.LoggerFactory
+import org.springframework.core.Ordered
+import org.springframework.core.annotation.Order
 import org.springframework.http.HttpStatus
 import org.springframework.http.ProblemDetail
 import org.springframework.security.access.AccessDeniedException
@@ -50,9 +53,10 @@ class ErrorHandlerController {
         return ex.body
     }
 
-    @ExceptionHandler(RuntimeException::class)
-    fun handleRuntimeException(ex: RuntimeException): ProblemDetail {
+    @ExceptionHandler(MismatchedInputException::class)
+    fun handleMissingKotlinParameterException(ex: MismatchedInputException): ProblemDetail {
         log.error(ex.message,ex)
-        return ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST,ex.message!!)
     }
+
 }

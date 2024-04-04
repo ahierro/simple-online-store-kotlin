@@ -4,13 +4,12 @@ import java.math.BigDecimal
 import java.time.LocalDateTime
 
 
-class PurchaseOrderDTO {
-    private val id: String? = null
-    private val idUser: String? = null
-    private val lines: Set<PurchaseOrderLineDTO>? = null
-    private val total: BigDecimal? = null
-    private val status: String? = null
-    private val createdAt: LocalDateTime? = null
-
-    private val user: UserDTO? = null
-}
+data class PurchaseOrderDTO(
+    val id: String? = null,
+    val idUser: String? = null,
+    val lines: Set<PurchaseOrderLineDTO>? = null,
+    val total: BigDecimal? = null,
+    val status: String? = null,
+    val createdAt: LocalDateTime? = null,
+    val user: UserDTO? = null,
+)

@@ -4,6 +4,6 @@ import jakarta.validation.constraints.NotEmpty
 import org.hibernate.validator.constraints.Length
 
 data class LoginRequest(
-    val username: @NotEmpty @Length(min = 6, max = 50) String,
-    val password: @NotEmpty @Length(min = 6, max = 50) String
+    @field:NotEmpty @field:Length(min = 6, max = 50) val username: String,
+    @field:NotEmpty @field:Length(min = 6, max = 50) val password: String
 )

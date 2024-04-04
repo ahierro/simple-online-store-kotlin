@@ -3,12 +3,12 @@ package com.iron.tec.labs.ecommerce.dto
 import java.math.BigDecimal
 
 
-class PurchaseOrderLineDTO {
-    private val idProduct: String? = null
-    private val productName: String? = null
-    private val stock: Int? = null
-    private val price: BigDecimal? = null
-    private val smallImageUrl: String? = null
-    private val categoryName: String? = null
-    private val quantity: Int? = null
-}
+data class PurchaseOrderLineDTO (
+    val idProduct: String? = null,
+    val productName: String? = null,
+    val stock: Int? = null,
+    val price: BigDecimal? = null,
+    val smallImageUrl: String? = null,
+    val categoryName: String? = null,
+    val quantity: Int? = null,
+)

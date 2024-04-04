@@ -7,14 +7,14 @@ import org.hibernate.validator.constraints.URL
 import org.hibernate.validator.constraints.UUID
 import java.math.BigDecimal
 
-data class ProductCreationDTO (
-    val productId: @NotEmpty @UUID String? = null,
-    val productName: @NotEmpty String? = null,
-    val productDescription: @NotEmpty String? = null,
-    val stock: @PositiveOrZero Int? = null,
-    val price: @Positive BigDecimal? = null,
-    val smallImageUrl: @NotEmpty @URL String? = null,
-    val bigImageUrl: @NotEmpty @URL String? = null,
-    val categoryId: @NotEmpty @UUID String? = null,
-    val deleted: Boolean? = null
+data class ProductCreationDTO(
+    @field:NotEmpty @field:UUID val productId: String,
+    @field:NotEmpty val productName: String,
+    @field:NotEmpty val productDescription: String,
+    @field:PositiveOrZero val stock: Int,
+    @field:Positive val price: BigDecimal,
+    @field:NotEmpty @field:URL val smallImageUrl: String,
+    @field:NotEmpty @field:URL val bigImageUrl: String,
+    @field:NotEmpty @field:UUID val categoryId: String,
+    val deleted: Boolean = false
 )

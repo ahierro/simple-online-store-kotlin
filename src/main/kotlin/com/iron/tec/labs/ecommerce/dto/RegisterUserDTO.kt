@@ -4,7 +4,6 @@ import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotEmpty
 import org.hibernate.validator.constraints.Length
 
-
 data class RegisterUserDTO(
     @field:NotEmpty @field:Length(min = 6, max = 50) val username: String,
     @field:NotEmpty @field:Length(min = 6, max = 50) val password: String,
