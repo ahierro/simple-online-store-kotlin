@@ -9,5 +9,4 @@ data class CategoryCreationDTO(
     val id: String? = null,
     @field:NotEmpty val name: String,
     @field:NotEmpty val description: String,
-    val deleted: Boolean? = null
 )

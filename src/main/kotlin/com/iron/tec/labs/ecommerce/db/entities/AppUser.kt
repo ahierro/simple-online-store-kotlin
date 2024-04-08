@@ -2,10 +2,7 @@ package com.iron.tec.labs.ecommerce.db.entities
 
 import com.iron.tec.labs.ecommerce.db.converters.JpaConverterBoolean
 import com.iron.tec.labs.ecommerce.db.converters.JpaConverterJson
-import jakarta.persistence.Convert
-import jakarta.persistence.Entity
-import jakarta.persistence.EntityListeners
-import jakarta.persistence.Id
+import jakarta.persistence.*
 import jakarta.validation.constraints.Email
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -28,7 +25,8 @@ data class AppUser(
     var active: Boolean = true,
     @Convert(converter = JpaConverterBoolean::class)
     var locked: Boolean = false,
-    @CreatedDate //    @InsertOnlyProperty
+    @CreatedDate
+    @Column(updatable=false)
     var createdAt: LocalDateTime? = null,
     @Convert(converter = JpaConverterJson::class)
     var authorities: List<String>

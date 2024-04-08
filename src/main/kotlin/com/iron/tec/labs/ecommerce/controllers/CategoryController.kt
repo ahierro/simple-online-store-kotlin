@@ -10,12 +10,11 @@ import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.servlet.http.HttpServletRequest
 import jakarta.validation.Valid
-import org.springframework.http.HttpRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.net.URI
-import java.util.*
 
 @RestController
 @RequestMapping("/api/category")
@@ -37,7 +36,7 @@ class CategoryController(
         )]
     )
     @GetMapping("/page")
-    fun getCategoriesPaged(pageRequest: @Valid PageRequestDTO?): PageResponseDTO<CategoryDTO?>? {
+    fun getCategoriesPaged(pageRequest: @Valid PageRequestDTO): PageResponseDTO<CategoryDTO?> {
         return categoryService.getCategoryPage(pageRequest)
     }
 
@@ -50,7 +49,7 @@ class CategoryController(
         ), ApiResponse(responseCode = "404", description = "Not Found")]
     )
     @GetMapping("/{id}")
-    fun getCategory(@PathVariable id: UUID?): CategoryDTO? {
+    fun getCategory(@PathVariable id: String): CategoryDTO? {
         return categoryService.getById(id)
     }
 
@@ -67,12 +66,12 @@ class CategoryController(
     )
     @PostMapping
     fun createCategory(
-        @RequestBody categoryCreationDTO: @Valid CategoryCreationDTO?,
-        serverHttpRequest: HttpRequest
+        @RequestBody categoryCreationDTO: @Valid CategoryCreationDTO,
+        serverHttpRequest: HttpServletRequest
     ): ResponseEntity<Void> {
         val category = categoryService.createCategory(categoryCreationDTO)
         return ResponseEntity.created(
-            URI.create(serverHttpRequest.uri.path.toString() + "/" + category.id)
+            URI.create(serverHttpRequest.requestURI + "/" + category.id)
         ).build()
     }
 
@@ -89,8 +88,8 @@ class CategoryController(
     )
     @PutMapping("/{id}")
     fun updateCategory(
-        @PathVariable("id") id: String?,
-        @RequestBody category: @Valid CategoryUpdateDTO?
+        @PathVariable("id") id: String,
+        @Valid @RequestBody category: CategoryUpdateDTO
     ): ResponseEntity<Void> {
         categoryService.updateCategory(id, category)
         return ResponseEntity.ok().build()
@@ -108,7 +107,7 @@ class CategoryController(
         ), ApiResponse(responseCode = "404", description = "Not Found")]
     )
     @DeleteMapping("/{id}")
-    fun deleteCategory(@PathVariable("id") id: String?): ResponseEntity<Void> {
+    fun deleteCategory(@PathVariable("id") id: String): ResponseEntity<Void> {
         categoryService.deleteCategory(id)
         return ResponseEntity.ok().build()
     }

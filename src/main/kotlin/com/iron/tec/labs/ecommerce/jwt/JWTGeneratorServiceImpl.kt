@@ -26,7 +26,7 @@ class JWTGeneratorServiceImpl(private val encoder: JwtEncoder, private val jwtCo
             .issuedAt(now)
             .expiresAt(now.plus(jwtConfig.expiration, ChronoUnit.MILLIS))
             .id(UUID.randomUUID().toString())
-            .subject((authentication.principal as AppUser).getSubject()?.toString())
+            .subject((authentication.principal as AppUser).getSubject())
             .claim(
                 "name",
                 authentication.name

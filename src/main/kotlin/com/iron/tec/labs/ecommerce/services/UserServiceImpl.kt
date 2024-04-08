@@ -69,7 +69,7 @@ class UserServiceImpl(
                 )
             )
         user.active = true
-        userRepository.save(user);
+        userRepository.save(user)
         return "User " + user.username + " confirmed!"
     }
 
