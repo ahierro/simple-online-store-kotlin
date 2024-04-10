@@ -15,6 +15,5 @@ data class ProductCreationDTO(
     @field:Positive val price: BigDecimal,
     @field:NotEmpty @field:URL val smallImageUrl: String,
     @field:NotEmpty @field:URL val bigImageUrl: String,
-    @field:NotEmpty @field:UUID val categoryId: String,
-    val deleted: Boolean = false
+    @field:NotEmpty @field:UUID val categoryId: String
 )

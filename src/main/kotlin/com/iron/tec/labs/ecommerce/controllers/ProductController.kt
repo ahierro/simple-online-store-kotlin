@@ -10,13 +10,12 @@ import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.servlet.http.HttpServletRequest
 import jakarta.validation.Valid
-import org.springframework.http.HttpRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.*
 import java.net.URI
-import java.util.*
 
 @RestController
 @RequestMapping("/api/product")
@@ -37,7 +36,7 @@ class ProductController(private val productService: ProductService) {
     )
     @GetMapping("/page")
     fun getProductsPaged(
-        pageRequest: @Valid ProductPageRequestDTO?,
+        @Valid pageRequest: ProductPageRequestDTO,
         authentication: Authentication?
     ): PageResponseDTO<ProductDTO?>? {
         return productService.getProductPage(pageRequest, authentication)
@@ -52,7 +51,7 @@ class ProductController(private val productService: ProductService) {
         ), ApiResponse(responseCode = "404", description = "Not Found", content = [Content()])]
     )
     @GetMapping("/{id}")
-    fun getProduct(@PathVariable id: UUID?): ProductDTO? {
+    fun getProduct(@PathVariable id: String): ProductDTO? {
         return productService.getById(id)
     }
 
@@ -75,12 +74,12 @@ class ProductController(private val productService: ProductService) {
     )
     @PostMapping
     fun createProduct(
-        @RequestBody productCreationDTO: @Valid ProductCreationDTO?,
-        serverHttpRequest: HttpRequest
+        @Valid @RequestBody productCreationDTO: ProductCreationDTO,
+        serverHttpRequest: HttpServletRequest
     ): ResponseEntity<Void> {
         productService.createProduct(productCreationDTO)
         return ResponseEntity.created(
-            URI.create(serverHttpRequest.uri.path.toString() + "/" + productCreationDTO!!.productId)
+            URI.create(serverHttpRequest.requestURI + "/" + productCreationDTO.productId)
         ).build()
     }
 
@@ -103,8 +102,8 @@ class ProductController(private val productService: ProductService) {
     )
     @PutMapping("/{id}")
     fun updateProduct(
-        @PathVariable("id") id: String?,
-        @RequestBody product: @Valid ProductUpdateDTO?
+        @PathVariable("id") id: String,
+        @Valid @RequestBody product: ProductUpdateDTO
     ): ResponseEntity<Void> {
         productService.updateProduct(id, product)
         return ResponseEntity.ok().build()
@@ -128,7 +127,7 @@ class ProductController(private val productService: ProductService) {
         ), ApiResponse(responseCode = "404", description = "Not Found", content = [Content()])]
     )
     @DeleteMapping("/{id}")
-    fun deleteProduct(@PathVariable("id") id: String?): ResponseEntity<Void> {
+    fun deleteProduct(@PathVariable("id") id: String): ResponseEntity<Void> {
         productService.deleteProduct(id)
         return ResponseEntity.ok().build()
     }

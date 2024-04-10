@@ -11,7 +11,8 @@ class GetCategoryMapperImpl : GetCategoryMapper {
             id = source.id!!,
             name = source.name,
             description = source.description,
-            createdAt = source.createdAt
+            createdAt = source.createdAt,
+            deleted = source.deleted
         )
     }
 }

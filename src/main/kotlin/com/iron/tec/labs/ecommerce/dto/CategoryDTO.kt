@@ -7,5 +7,6 @@ data class CategoryDTO(
     val id: String,
     val name: String? = null,
     val description: String? = null,
-    val createdAt: LocalDateTime? = null
+    val createdAt: LocalDateTime? = null,
+    val deleted: Boolean? = null,
 )

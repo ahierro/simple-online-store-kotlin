@@ -13,5 +13,5 @@ data class ProductDTO (
     val bigImageUrl: String? = null,
     val createdAt: LocalDateTime? = null,
     val category: CategoryDTO? = null,
-    val deleted: Boolean = true,
+    val deleted: Boolean? = null,
 )

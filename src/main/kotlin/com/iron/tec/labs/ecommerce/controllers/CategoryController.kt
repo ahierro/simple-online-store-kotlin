@@ -36,7 +36,7 @@ class CategoryController(
         )]
     )
     @GetMapping("/page")
-    fun getCategoriesPaged(pageRequest: @Valid PageRequestDTO): PageResponseDTO<CategoryDTO?> {
+    fun getCategoriesPaged(@Valid pageRequest: PageRequestDTO): PageResponseDTO<CategoryDTO?> {
         return categoryService.getCategoryPage(pageRequest)
     }
 
@@ -66,7 +66,7 @@ class CategoryController(
     )
     @PostMapping
     fun createCategory(
-        @RequestBody categoryCreationDTO: @Valid CategoryCreationDTO,
+        @Valid @RequestBody categoryCreationDTO: CategoryCreationDTO,
         serverHttpRequest: HttpServletRequest
     ): ResponseEntity<Void> {
         val category = categoryService.createCategory(categoryCreationDTO)
