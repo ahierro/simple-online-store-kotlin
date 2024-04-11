@@ -16,8 +16,8 @@ import java.time.LocalDateTime
 data class AppUser(
     @Id
     var id: String,
-    @JvmField var username: String,
-    @JvmField var password: String,
+    @JvmField final var username: String,
+    @JvmField final var password: String,
     var email: @Email String,
     var firstName: String,
     var lastName: String,
